@@ -3,6 +3,8 @@
 @section('isi-kandungan')
 <form method="POST" action="{{ route('users.store') }}">
 @csrf
+{{ csrf_field() }}
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
 <div class="card">

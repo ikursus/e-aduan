@@ -14,6 +14,16 @@
         <div class="row mt-5">
             <div class="col-md-10 offset-md-1">
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 @yield('isi-kandungan')
 
             </div>

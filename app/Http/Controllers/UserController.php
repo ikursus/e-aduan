@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserStoreRequest;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -32,8 +34,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
+        $request->validated();
+
         return $request->all();
     }
 
