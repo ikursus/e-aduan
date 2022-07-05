@@ -9,38 +9,10 @@
         <p>Selamat Datang!</p>
 
         <ul>
-            <li><a href="{{ route('aduan.baru') }}">Aduan</a></li>
-            <li><a href="<?php echo route('logout'); ?>">Logout</a></li>
+            <li><a href="{{ route('aduan.baru') }}">Aduan Baru</a></li>
+            <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>
 
-        <?php
-
-        $pelajar = [
-            ['id' => 1, 'name' => 'ahmad'],
-            ['id' => 2, 'name' => 'siti'],
-            ['id' => 3, 'name' => 'ali'],
-        ];
-
-        foreach($pelajar as $key)
-        {
-            echo '<li>' . $key['name'] . '</li>';
-        }
-
-        ?>
-
-        @php
-
-        $pelajar = [
-            ['id' => 1, 'name' => 'a'],
-            ['id' => 2, 'name' => 'b'],
-            ['id' => 3, 'name' => 'c'],
-        ];
-
-        @endphp
-
-        @foreach($pelajar as $key)
-        <li>{{ $key['name'] }}</li>
-        @endforeach
     </div>
     <div class="card-footer">
     </div>
@@ -49,7 +21,5 @@
 @endsection
 
 @section('jsscript')
-<script>
-    alert('test')
-</script>
+
 @endsection

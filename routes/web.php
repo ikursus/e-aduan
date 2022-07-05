@@ -15,7 +15,7 @@ Route::get('/login', function () {
 // Route untuk terima data dari borang login dan proseskan login
 Route::post('/login', function () {
     return 'Login tidak berjaya';
-});
+})->name('login.authenticate');
 
 
 Route::middleware(['guest'])->group(function () {
