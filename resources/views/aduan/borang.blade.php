@@ -22,6 +22,7 @@
 
         </div>
         <div class="card-footer">
+            <a href="{{ route('aduan.index') }}" class="btn btn-dark">Kembali</a>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
