@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AduanController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,7 +51,9 @@ Route::middleware(['guest'])->group(function () {
     Route::patch('aduan/{id}', [AduanController::class, 'update'])->name('aduan.update');
     Route::delete('aduan/{id}', [AduanController::class, 'destroy'])->name('aduan.destroy');
 
-    // Route::resource('aduan', AduanController::class);
+    // Route::resource('users', UserController::class)->except(['show', 'destroy']);
+    // Route::resource('users', UserController::class)->only(['create', 'index', 'store']);
+    Route::resource('users', UserController::class);
 
     Route::get('/logout', function () {
         return 'Login berjaya';

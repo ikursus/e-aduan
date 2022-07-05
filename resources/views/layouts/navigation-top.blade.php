@@ -19,6 +19,9 @@
             <a class="nav-link" href="{{ route('aduan.index') }}">Aduan</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}">Logout</a>
           </li>
         </ul>
