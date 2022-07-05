@@ -45,7 +45,7 @@
 
     </div>
     <div class="card-footer">
-        <a href="{{ route('aduan.baru') }}" class="btn btn-primary">Tambah Aduan</a>
+        <a href="{{ route('aduan.create') }}" class="btn btn-primary">Tambah Aduan</a>
     </div>
 </div>
 @endsection
