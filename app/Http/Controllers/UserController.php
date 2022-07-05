@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserStoreRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -15,7 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $senaraiUsers = DB::table('users')
+        ->orderBy('id', 'desc')
+        ->paginate(2);
+
+        return view('users.index', compact('senaraiUsers'));
     }
 
     /**
@@ -60,7 +65,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit');
+        $user = DB::table('users')->where('id', $id)->first();
+
+        if (!$user)
+        {
+            return redirect()->route('users.index')
+            ->with('error_message', 'Tiada rekod user berkenaan');
+        }
+
+        return view('users.edit', compact('user'));
     }
 
     /**

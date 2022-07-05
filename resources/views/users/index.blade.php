@@ -22,16 +22,16 @@
 
                 @foreach ($senaraiUsers as $user)
                     <tr>
-                        <td>{{ $user['id'] }}</td>
-                        <td>{{ $user['name'] }}</td>
-                        <td>{{ $user['email'] }}</td>
-                        <td>{{ $user['phone'] }}</td>
-                        <td>{{ $user['status'] }}</td>
-                        <td>{{ $user['role'] }}</td>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->phone }}</td>
+                        <td>{{ $user->status }}</td>
+                        <td>{{ $user->role }}</td>
                         <td>
-                            <a href="{{ route('user.edit', $user['id']) }}" class="btn btn-info">KEMASKINI</a>
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">KEMASKINI</a>
 
-                            <form method="POST" action="{{ route('user.destroy', $user['id']) }}">
+                            <form method="POST" action="{{ route('users.destroy', $user->id) }}">
                                 {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="DELETE"> --}}
                                 @csrf
@@ -47,6 +47,7 @@
             </tbody>
         </table>
 
+        {{ $senaraiUsers->links() }}
     </div>
     <div class="card-footer">
         <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah User</a>

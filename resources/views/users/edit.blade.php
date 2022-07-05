@@ -6,7 +6,7 @@
 @csrf
 
 <div class="card">
-    <div class="card-header">Kemaskini User</div>
+    <div class="card-header">Kemaskini User - {{ $user->name }}</div>
     <div class="card-body">
 
     @include('users.borang')
