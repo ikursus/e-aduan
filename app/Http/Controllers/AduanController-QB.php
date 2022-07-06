@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AduanRequest;
@@ -16,9 +15,24 @@ class AduanController extends Controller
      */
     public function index()
     {
-        $senaraiAduan = Aduan::orderBy('id', 'desc')->paginate(10);
+        $senaraiAduan = DB::table('aduan')->orderBy('id', 'desc')->paginate(10);
+
+        // $senaraiAduan = [
+        //     ['id' => 1, 'pengadu' => 'Ahmad', 'email_pengadu' => 'ahmad@test.com', 'aduan' => 'Sample Aduan 1'],
+        //     ['id' => 2, 'pengadu' => 'Siti', 'email_pengadu' => 'siti@test.com', 'aduan' => 'Sample Aduan 2'],
+        //     ['id' => 3, 'pengadu' => 'Ali', 'email_pengadu' => 'ali@test.com', 'aduan' => 'Sample Aduan 3'],
+        //     ['id' => 4, 'pengadu' => 'Muthu', 'email_pengadu' => 'muthu@test.com', 'aduan' => 'Sample Aduan 4'],
+        //     ['id' => 5, 'pengadu' => 'Apek', 'email_pengadu' => 'apek@test.com', 'aduan' => 'Sample Aduan 5'],
+        // ];
 
         $title = 'Senarai Aduan';
+
+        // return view('aduan.index');
+        // return view('aduan.index')
+        // ->with('senaraiAduan', $senaraiAduan)
+        // ->with('title', $title);
+
+        //return view('aduan.index', ['tajuk' => $title, 'senaraiAduan' => $senaraiAduan]);
 
         return view('aduan.index', compact('title', 'senaraiAduan'));
     }

@@ -54,11 +54,11 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($senaraiAduan as $aduan)
+                @forelse ($user->senaraiAduan as $aduan)
                     <tr>
                         <td>{{ $aduan->id }}</td>
-                        <td>{{ $aduan->name }}</td>
-                        <td>{{ $aduan->email }}</td>
+                        <td>{{ $aduan->nama_pengadu }}</td>
+                        <td>{{ $aduan->email_pengadu }}</td>
                         <td>{{ $aduan->aduan }}</td>
                         <td>
                             <a href="{{ route('aduan.edit', $aduan->id) }}" class="btn btn-info">KEMASKINI</a>

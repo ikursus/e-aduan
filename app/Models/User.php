@@ -26,6 +26,10 @@ class User extends Authenticatable
         'role'
     ];
 
+    // Jika tidak menggunakan primary key id, maka maklumkan
+    // kepada model nama primary key yang digunakan.
+    // protected $primaryKey = 'iduser';
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -51,5 +55,11 @@ class User extends Authenticatable
         {
             $this->attributes['password'] = bcrypt($value);
         }
+    }
+
+    public function senaraiAduan()
+    {
+        return $this->hasMany(Aduan::class);
+        //return $this->hasMany(Aduan::class, 'users_id', 'iduser');
     }
 }

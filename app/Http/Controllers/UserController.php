@@ -58,20 +58,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = DB::table('users')->find($id);
-
-        // $senaraiAduan = DB::table('aduan')->where('user_id', $user->id)->paginate(10);
-
-        // Gunakan join table untuk mengakses column data daripada table yang di-join
-        $senaraiAduan = DB::table('aduan')
-        ->where('user_id', $user->id)
-        ->join('users', 'aduan.user_id', '=', 'users.id')
-        ->select('aduan.*', 'users.name', 'users.email')
-        ->paginate(10);
-
-        return view('users.show', compact('user', 'senaraiAduan'));
+        return view('users.show', compact('user'));
     }
 
     /**
