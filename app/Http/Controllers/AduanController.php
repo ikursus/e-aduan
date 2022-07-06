@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AduanRequest;
 
 class AduanController extends Controller
 {
@@ -13,13 +15,15 @@ class AduanController extends Controller
      */
     public function index()
     {
-        $senaraiAduan = [
-            ['id' => 1, 'pengadu' => 'Ahmad', 'email_pengadu' => 'ahmad@test.com', 'aduan' => 'Sample Aduan 1'],
-            ['id' => 2, 'pengadu' => 'Siti', 'email_pengadu' => 'siti@test.com', 'aduan' => 'Sample Aduan 2'],
-            ['id' => 3, 'pengadu' => 'Ali', 'email_pengadu' => 'ali@test.com', 'aduan' => 'Sample Aduan 3'],
-            ['id' => 4, 'pengadu' => 'Muthu', 'email_pengadu' => 'muthu@test.com', 'aduan' => 'Sample Aduan 4'],
-            ['id' => 5, 'pengadu' => 'Apek', 'email_pengadu' => 'apek@test.com', 'aduan' => 'Sample Aduan 5'],
-        ];
+        $senaraiAduan = DB::table('aduan')->orderBy('id', 'desc')->paginate(10);
+
+        // $senaraiAduan = [
+        //     ['id' => 1, 'pengadu' => 'Ahmad', 'email_pengadu' => 'ahmad@test.com', 'aduan' => 'Sample Aduan 1'],
+        //     ['id' => 2, 'pengadu' => 'Siti', 'email_pengadu' => 'siti@test.com', 'aduan' => 'Sample Aduan 2'],
+        //     ['id' => 3, 'pengadu' => 'Ali', 'email_pengadu' => 'ali@test.com', 'aduan' => 'Sample Aduan 3'],
+        //     ['id' => 4, 'pengadu' => 'Muthu', 'email_pengadu' => 'muthu@test.com', 'aduan' => 'Sample Aduan 4'],
+        //     ['id' => 5, 'pengadu' => 'Apek', 'email_pengadu' => 'apek@test.com', 'aduan' => 'Sample Aduan 5'],
+        // ];
 
         $title = 'Senarai Aduan';
 
@@ -49,9 +53,13 @@ class AduanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AduanRequest $request)
     {
-        return 'Aduan berjaya dikirimkan';
+        $data = $request->validated();
+
+        DB::table('aduan')->insert($data);
+
+        return redirect()->route('aduan.index')->with('success_message', 'Rekod berjaya disimpan!');
     }
 
     /**

@@ -19,14 +19,14 @@
             <tbody>
                 @forelse ($senaraiAduan as $aduan)
                     <tr>
-                        <td>{{ $aduan['id'] }}</td>
-                        <td>{{ $aduan['pengadu'] }}</td>
-                        <td>{{ $aduan['email_pengadu'] }}</td>
-                        <td>{{ $aduan['aduan'] }}</td>
+                        <td>{{ $aduan->id }}</td>
+                        <td>{{ $aduan->nama_pengadu }}</td>
+                        <td>{{ $aduan->email_pengadu }}</td>
+                        <td>{{ $aduan->aduan }}</td>
                         <td>
-                            <a href="{{ route('aduan.edit', $aduan['id']) }}" class="btn btn-info">KEMASKINI</a>
+                            <a href="{{ route('aduan.edit', $aduan->id) }}" class="btn btn-info">KEMASKINI</a>
 
-                            <form method="POST" action="{{ route('aduan.destroy', $aduan['id']) }}">
+                            <form method="POST" action="{{ route('aduan.destroy', $aduan->id) }}">
                                 {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="DELETE"> --}}
                                 @csrf
