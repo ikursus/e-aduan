@@ -26,7 +26,8 @@ class AduanRequest extends FormRequest
         return [
             'nama_pengadu' => ['required'],
             'email_pengadu' => ['required', 'email:filter'],
-            'aduan' => ['required']
+            'aduan' => ['required', 'unique:aduan,aduan'],
+            'user_id' => ['required']
         ];
     }
 }

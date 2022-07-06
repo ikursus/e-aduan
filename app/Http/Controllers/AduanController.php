@@ -56,6 +56,7 @@ class AduanController extends Controller
     public function store(AduanRequest $request)
     {
         $data = $request->validated();
+        //$data['user_id'] = auth()->id();
 
         DB::table('aduan')->insert($data);
 
@@ -96,6 +97,7 @@ class AduanController extends Controller
     public function update(AduanRequest $request, $id)
     {
         $data = $request->validated();
+        // $data['user_id'] = auth()->id();
 
         DB::table('aduan')->where('id', $id)->update($data);
 
