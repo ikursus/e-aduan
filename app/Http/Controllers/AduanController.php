@@ -71,7 +71,6 @@ class AduanController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

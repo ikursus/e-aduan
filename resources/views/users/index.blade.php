@@ -29,6 +29,7 @@
                         <td>{{ $user->status }}</td>
                         <td>{{ $user->role }}</td>
                         <td>
+                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary">LIHAT</a>
                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">KEMASKINI</a>
 
                             <form method="POST" action="{{ route('users.destroy', $user->id) }}">
