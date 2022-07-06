@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -43,7 +44,20 @@ class UserController extends Controller
     {
         $request->validated();
 
-        return $request->all();
+        $data = $request->only([
+            'name',
+            'email',
+            'phone',
+            'status',
+            'role'
+        ]);
+
+        $data['password'] = bcrypt($request->password);
+
+        DB::table('users')->insert($data);
+
+        return redirect()->route('users.index')->with('success_message', 'Rekod berjaya disimpan!');
+
     }
 
     /**
@@ -65,7 +79,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = DB::table('users')->where('id', $id)->first();
+        // $user = DB::table('users')->where('id', $id)->first();
+        $user = DB::table('users')->find($id);
 
         if (!$user)
         {
@@ -83,9 +98,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        //
+        // Validation
+        $request->validated();
+
+        // Dapatkan semua data KECUALI password
+        $data = $request->only([
+            'name',
+            'email',
+            'phone',
+            'status',
+            'role'
+        ]);
+
+        // Semak jika ada password, encrypt dan attach kepada array $data
+        if(!is_null($request->input('password')))
+        {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        DB::table('users')->where('id', $id)->update($data);
+
+        return redirect()->route('users.index')->with('success_message', 'Rekod berjaya dikemaskini!');
     }
 
     /**
@@ -96,6 +131,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('users')->where('id', '=', $id)->delete();
+
+        return redirect()->route('users.index')->with('success_message', 'Rekod berjaya dihapuskan!');
     }
 }

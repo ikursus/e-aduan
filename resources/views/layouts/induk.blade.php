@@ -30,6 +30,12 @@
                 </div>
                 @endif
 
+                @if (session('success_message'))
+                <div class="alert alert-success">
+                    {{ session('success_message') }}
+                </div>
+                @endif
+
                 @yield('isi-kandungan')
 
             </div>

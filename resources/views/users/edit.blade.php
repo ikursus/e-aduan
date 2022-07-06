@@ -1,7 +1,7 @@
 @extends('layouts.induk')
 
 @section('isi-kandungan')
-<form method="POST" action="{{ route('users.update', 1) }}">
+<form method="POST" action="{{ route('users.update', $user->id) }}">
 @method('PATCH')
 @csrf
 

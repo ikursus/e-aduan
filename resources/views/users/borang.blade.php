@@ -22,16 +22,26 @@
     <div class="mb-3">
         <label class="form-label">Role</label>
         <select name="role" class="form-control">
+            @if(isset($user))
             <option value="USER"{{ $user->role == 'USER' ? ' selected="selected' : null }}>User</option>
             <option value="ADMIN"{{ $user->role == 'ADMIN' ? ' selected="selected' : null }}>Admin</option>
+            @else
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+            @endif
         </select>
     </div>
 
     <div class="mb-3">
         <label class="form-label">Status</label>
         <select name="status" class="form-control">
+            @if(isset($user))
             <option value="ACTIVE"{{ $user->status == 'ACTIVE' ? ' selected="selected' : null }}>Active</option>
             <option value="INACTIVE"{{ $user->status == 'INACTIVE' ? ' selected="selected' : null }}>Inactive</option>
+            @else
+            <option value="ACTIVE">Active</option>
+            <option value="INACTIVE">Inactive</option>
+            @endif
         </select>
     </div>
 
