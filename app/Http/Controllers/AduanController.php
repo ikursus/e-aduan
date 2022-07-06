@@ -44,7 +44,7 @@ class AduanController extends Controller
      */
     public function create()
     {
-        return view('aduan.borang');
+        return view('aduan/create');
     }
 
     /**
@@ -81,7 +81,9 @@ class AduanController extends Controller
      */
     public function edit($id)
     {
-        return view('aduan.borang');
+        $aduan = DB::table('aduan')->find($id);
+
+        return view('aduan.edit', compact('aduan'));
     }
 
     /**
@@ -91,9 +93,13 @@ class AduanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AduanRequest $request, $id)
     {
-        return 'Data berjaya dikemaskini';
+        $data = $request->validated();
+
+        DB::table('aduan')->where('id', $id)->update($data);
+
+        return redirect()->route('aduan.index')->with('success_message', 'Rekod berjaya dikemaskini!');
     }
 
     /**
@@ -104,6 +110,9 @@ class AduanController extends Controller
      */
     public function destroy($id)
     {
-        return 'Rekod berjaya dihapuskan!';
+        DB::table('aduan')->where('id', $id)->delete();
+
+        return redirect()->route('aduan.index')->with('success_message', 'Rekod berjaya dihapuskan!');
+
     }
 }
