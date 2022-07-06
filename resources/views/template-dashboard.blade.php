@@ -6,10 +6,7 @@
     <div class="card-header">Dashboard</div>
     <div class="card-body">
 
-        <p>Selamat Datang!</p>
-
-        {{-- {!! $scriptAlert !!} --}}
-        {{ $scriptAlert }}
+        <p>Selamat Datang {{ auth()->user()->name }}!</p>
 
         <ul>
             <li><a href="{{ route('aduan.create') }}">Aduan Baru</a></li>

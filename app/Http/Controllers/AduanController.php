@@ -16,7 +16,16 @@ class AduanController extends Controller
      */
     public function index()
     {
-        $senaraiAduan = Aduan::orderBy('id', 'desc')->paginate(10);
+        $sql = Aduan::query()->orderBy('id', 'desc');
+
+        if (auth()->user()->role == 'ADMIN')
+        {
+            $senaraiAduan = $sql->paginate(10);
+        }
+        else
+        {
+            $senaraiAduan = $sql->where('user_id', auth()->id())->paginate(10);
+        }
 
         $title = 'Senarai Aduan';
 

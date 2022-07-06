@@ -1,11 +1,11 @@
 <div class="mb-3">
     <label class="form-label">Nama Pengadu</label>
-    <input type="text" class="form-control" name="nama_pengadu" value="{{ $aduan->nama_pengadu ?? auth()->user()->name }}">
+    <input type="text" class="form-control" name="nama_pengadu" value="{{ $aduan->nama_pengadu ?? auth()->user()->name ?? old('nama_pengadu') }}">
 </div>
 
 <div class="mb-3">
     <label class="form-label">Email Pengadu</label>
-    <input type="email" class="form-control" name="email_pengadu" value="{{ $aduan->email_pengadu ?? auth()->user()->email }}">
+    <input type="email" class="form-control" name="email_pengadu" value="{{ $aduan->email_pengadu ?? auth()->user()->email ?? old('email_pengadu') }}">
 </div>
 <div class="mb-3">
     <label class="form-label">Aduan</label>
