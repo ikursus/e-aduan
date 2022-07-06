@@ -12,7 +12,7 @@
         {{ $scriptAlert }}
 
         <ul>
-            <li><a href="{{ route('aduan.baru') }}">Aduan Baru</a></li>
+            <li><a href="{{ route('aduan.create') }}">Aduan Baru</a></li>
             <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>
 

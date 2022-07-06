@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\AduanController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AduanController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
     //return env('APP_NAME');
@@ -10,17 +11,16 @@ Route::get('/', function () {
 });
 
 // Route untuk memaparkan borang login
-Route::get('/login', function () {
-    return view('template-login');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('template-login');
+// })->name('login');
+Route::view('/login', 'template-login')->name('login');
 
 // Route untuk terima data dari borang login dan proseskan login
-Route::post('/login', function () {
-    return 'Login tidak berjaya';
-})->name('login.authenticate');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 
 
-Route::middleware(['guest'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function () {
 
@@ -55,8 +55,6 @@ Route::middleware(['guest'])->group(function () {
     // Route::resource('users', UserController::class)->only(['create', 'index', 'store']);
     Route::resource('users', UserController::class);
 
-    Route::get('/logout', function () {
-        return 'Login berjaya';
-    })->name('logout');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 });

@@ -9,9 +9,12 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
+          @guest
           <li class="nav-item">
             <a class="nav-link" href="{{ route('login') }}">Login</a>
           </li>
+          @endguest
+          @auth
           <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
           </li>
@@ -24,6 +27,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}">Logout</a>
           </li>
+          @endauth
         </ul>
       </div>
     </div>
