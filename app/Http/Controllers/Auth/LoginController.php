@@ -21,10 +21,16 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        // Pastikan akaun user yang ingin login adalah ACTIVE
         $credentials['status'] = 'ACTIVE';
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if (auth()->user()->role == 'ADMIN')
+            {
+                return redirect()->intended('pengurusan');
+            }
 
             return redirect()->intended('dashboard');
         }
