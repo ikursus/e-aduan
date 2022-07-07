@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('aduan/', [AduanController::class, 'index'])->name('aduan.index');
 
+    Route::get('aduan/export', [AduanController::class, 'export'])->name('aduan.export');
+    Route::post('aduan/import', [AduanController::class, 'import'])->name('aduan.import');
     Route::get('aduan/{id}/edit', [AduanController::class, 'edit'])->name('aduan.edit');
     Route::get('aduan/create', [AduanController::class, 'create'])->name('aduan.create');
     Route::post('aduan', [AduanController::class, 'store'])->name('aduan.store');

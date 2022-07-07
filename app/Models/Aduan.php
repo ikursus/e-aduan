@@ -12,4 +12,12 @@ class Aduan extends Model
     // Maklumkan kepada model Aduan supaya hubungi table bernama aduan.
     // Jika tidak letakkan info ini, maka Aduan akan cuba cari table aduans (plural kepada model Aduan)
     protected $table = 'aduan';
+
+    protected $fillable = [
+        'user_id',
+        'nama_pengadu',
+        'email_pengadu',
+        'aduan',
+        'status'
+    ];
 }

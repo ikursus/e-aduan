@@ -54,6 +54,38 @@
     </div>
     <div class="card-footer">
         <a href="{{ route('aduan.create') }}" class="btn btn-primary">Tambah Aduan</a>
+        <a href="{{ route('aduan.export') }}" class="btn btn-dark">Export Aduan</a>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#import-aduan">
+            Import Aduan
+        </button>
+
+        <!-- Modal -->
+        <form method="POST" action="{{ route('aduan.import') }}" enctype="multipart/form-data">
+            @csrf
+
+            <div class="modal fade" id="import-aduan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Fail Excell</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="file" name="aduan_import" class="form-control">
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </form>
     </div>
 </div>
 @endsection

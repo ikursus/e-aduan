@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aduan;
+use App\Exports\AduanExport;
+use App\Imports\AduanImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AduanRequest;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AduanController extends Controller
 {
@@ -129,5 +132,19 @@ class AduanController extends Controller
 
         return redirect()->route('aduan.index')->with('success_message', 'Rekod berjaya dihapuskan!');
 
+    }
+
+    public function export()
+    {
+        return Excel::download(new AduanExport, 'aduan.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('aduan_import');
+
+        Excel::import(new AduanImport, $file);
+
+        return redirect()->route('aduan.index')->with('success_message', 'All good!');
     }
 }
