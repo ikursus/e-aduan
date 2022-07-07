@@ -11,7 +11,8 @@
                     <th>ID</th>
                     <th>TAHUN</th>
                     <th>KOD</th>
-                    <th>AMAUN</th>
+                    <th>AMAUN ASAL</th>
+                    <th>AMAUN BAKI</th>
                     <th>TINDAKAN</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                         <td>{{ $budget->tahun }}</td>
                         <td>{{ $budget->kod_budget }}</td>
                         <td>{{ $budget->amaun }}</td>
+                        <td>{{ $budget->baki->amaun }}</td>
                         <td>
                             <a href="{{ route('budgets.show', $budget->id) }}" class="btn btn-primary">LIHAT</a>
                             <a href="{{ route('budgets.edit', $budget->id) }}" class="btn btn-info">KEMASKINI</a>

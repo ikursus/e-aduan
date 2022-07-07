@@ -10,4 +10,15 @@ class Budget extends Model
     use HasFactory;
 
     protected $connection = 'mysql2';
+
+    protected $fillable = [
+        'tahun',
+        'kod_budget',
+        'amaun'
+    ];
+
+    public function baki()
+    {
+        return $this->hasOne(Baki::class);
+    }
 }

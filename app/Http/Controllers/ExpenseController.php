@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Baki;
 use App\Models\Budget;
 use App\Models\Expense;
 use Illuminate\Http\Request;
@@ -43,7 +44,18 @@ class ExpenseController extends Controller
     {
         $data = $request->validated();
 
-        Expense::create($data);
+        // Bina rekod expenses
+        $expense = Expense::create($data);
+
+        // Dapatkan baki budget daripada table budget berdasarkan kod budget
+        $balance = Baki::where('kod_budget', '=', $expense->kod_budget)->firstOrFail();
+
+        // Kira dan kemaskini baki baru
+        $newBalance = $balance->amaun - $expense->amaun;
+
+        $balance->update([
+            'amaun' => $newBalance
+        ]);
 
         // $expense = new Expense;
         // $expense->tarikh = $request->tarikh;

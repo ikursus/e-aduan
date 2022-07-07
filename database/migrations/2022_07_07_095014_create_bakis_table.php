@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::connection('mysql2')->create('baki', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('budget_id');
+            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->integer('tahun')->unsigned();
             $table->string('kod_budget');
             $table->decimal('amaun', 20, 2)->default(0);

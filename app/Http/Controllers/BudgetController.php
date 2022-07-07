@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Baki;
 use App\Models\Budget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,8 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        $senaraiBudgets = DB::connection('mysql2')->table('budgets')->paginate(10);
+        // $senaraiBudgets = DB::connection('mysql2')->table('budgets')->paginate(10);
+        $senaraiBudgets = Budget::paginate(10);
 
         return view('budgets.index', compact('senaraiBudgets'));
     }
@@ -50,7 +52,27 @@ class BudgetController extends Controller
             'amaun'
         ]);
 
-        DB::connection('mysql2')->table('budgets')->insert($data);
+        try {
+            DB::beginTransaction();
+
+            // $budget = DB::connection('mysql2')->table('budgets')->insert($data);
+            $budget = Budget::create($data);
+
+            $data['budget_id'] = $budget->id;
+            // Update baki dalam table baki di database eaduan2
+            Baki::create($data);
+
+            DB::commit();
+
+            return redirect()->route('budgets.index')->with('success_message', 'Rekod berjaya disimpan');
+
+        } catch (\Throwable $th) {
+
+            DB::rollBack();
+            return redirect()->route('budgets.index')->with('error_message', $th->getMessage());
+        }
+
+
 
         return redirect()->route('budgets.index');
     }
@@ -101,6 +123,9 @@ class BudgetController extends Controller
         ]);
 
         $budget = DB::connection('mysql2')->table('budgets')->where('id', $id)->update($data);
+
+        $baki = Baki::where('budget_id', '=', $id)->first();
+        $baki->update('amaun');
 
         return redirect()->route('budgets.index');
     }
