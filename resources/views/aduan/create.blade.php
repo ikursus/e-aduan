@@ -1,7 +1,7 @@
 @extends('layouts.induk')
 
 @section('isi-kandungan')
-<form method="POST" action="{{ route('aduan.store') }}">
+<form method="POST" action="{{ route('aduan.store') }}" enctype="multipart/form-data">
     @csrf
 
     <div class="card">

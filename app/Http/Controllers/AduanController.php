@@ -53,6 +53,12 @@ class AduanController extends Controller
         $data = $request->validated();
         //$data['user_id'] = auth()->id();
 
+        if ($request->has('fail'))
+        {
+            $request->fail->store('attachment');
+        }
+
+
         DB::table('aduan')->insert($data);
 
         return redirect()->route('aduan.index')->with('success_message', 'Rekod berjaya disimpan!');

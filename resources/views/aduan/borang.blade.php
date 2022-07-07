@@ -11,4 +11,9 @@
     <label class="form-label">Aduan</label>
     <textarea name="aduan" class="form-control">{{ $aduan->aduan ?? old('aduan') }}</textarea>
 </div>
+
+<div class="mb-3">
+    <label class="form-label">Fail Attachment</label>
+    <input type="file" name="fail" class="form-control">
+</div>
 <input type="hidden" name="user_id" value="{{ auth()->id() }}">
