@@ -13,6 +13,7 @@
                     <th>NAMA PENGADU</th>
                     <th>EMAIL PENGADU</th>
                     <th>ADUAN</th>
+                    <th>FAIL</th>
                     <th>TINDAKAN</th>
                 </tr>
             </thead>
@@ -23,6 +24,13 @@
                         <td>{{ $aduan->nama_pengadu }}</td>
                         <td>{{ $aduan->email_pengadu }}</td>
                         <td>{{ $aduan->aduan }}</td>
+                        <td>
+                            @if(!is_null($aduan->fail))
+                            <a href="{{ asset('/upload/' . $aduan->fail) }}" class="btn btn-success">LIHAT</a>
+                            @else
+                            TIADA FAIL
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ route('aduan.edit', $aduan->id) }}" class="btn btn-info">KEMASKINI</a>
 

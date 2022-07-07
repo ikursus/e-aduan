@@ -6,6 +6,7 @@ use App\Models\Aduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AduanRequest;
+use Illuminate\Support\Facades\File;
 
 class AduanController extends Controller
 {
@@ -55,9 +56,9 @@ class AduanController extends Controller
 
         if ($request->has('fail'))
         {
-            $request->fail->store('attachment');
+            $fileName = $request->fail->store('attachments', 'public_upload');
+            $data['fail'] = $fileName;
         }
-
 
         DB::table('aduan')->insert($data);
 
@@ -98,6 +99,18 @@ class AduanController extends Controller
     {
         $data = $request->validated();
         // $data['user_id'] = auth()->id();
+        $aduan = Aduan::findOrFail($id);
+
+        if ($request->has('fail'))
+        {
+            if (!is_null($aduan->fail))
+            {
+                File::delete(public_path('upload/' . $aduan->fail));
+            }
+
+            $fileName = $request->fail->store('attachments/', 'public_upload');
+            $data['fail'] = $fileName;
+        }
 
         DB::table('aduan')->where('id', $id)->update($data);
 
