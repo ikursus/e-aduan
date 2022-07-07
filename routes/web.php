@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AduanController;
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -42,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
     // Route::resource('users', UserController::class)->except(['show', 'destroy']);
     // Route::resource('users', UserController::class)->only(['create', 'index', 'store']);
     Route::resource('users', UserController::class);
+    Route::resource('budgets', BudgetController::class);
+    Route::resource('expenses', ExpenseController::class);
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
