@@ -26,7 +26,7 @@
                         <td>{{ $aduan->aduan }}</td>
                         <td>
                             @if(!is_null($aduan->fail))
-                            <a href="{{ asset('/upload/' . $aduan->fail) }}" class="btn btn-success">LIHAT</a>
+                            <img src="{{ asset('/upload/' . $aduan->fail) }}" style="max-width: 100px">
                             @else
                             TIADA FAIL
                             @endif
