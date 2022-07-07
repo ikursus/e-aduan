@@ -122,10 +122,18 @@ class BudgetController extends Controller
             'amaun'
         ]);
 
-        $budget = DB::connection('mysql2')->table('budgets')->where('id', $id)->update($data);
+        //$budget = DB::connection('mysql2')->table('budgets')->where('id', $id)->update($data);
+        $budget = Budget::findOrFail($id);
+        $budget->update($data);
 
-        $baki = Baki::where('budget_id', '=', $id)->first();
-        $baki->update('amaun');
+        $data['budget_id'] = $budget->id;
+
+        $baki = Baki::where('budget_id', '=', $id)->firstOrCreate($data);
+
+        $baki->update([
+            'kod_budget' => $budget->kod_budget,
+            'amaun' => $budget->amaun
+        ]);
 
         return redirect()->route('budgets.index');
     }
